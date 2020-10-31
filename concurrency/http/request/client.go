@@ -55,9 +55,9 @@ func (c *client) GetResult(
 func (c *client) GetResultChannel(
 	ctx context.Context,
 	urls []string,
-) <-chan *result {
+) <-chan result {
 	semaphoreChan := make(chan struct{}, c.concurrencyLimit)
-	resultsChan := make(chan *result)
+	resultsChan := make(chan result)
 
 	var wg sync.WaitGroup
 	wg.Add(len(urls))
@@ -70,7 +70,7 @@ func (c *client) GetResultChannel(
 			default:
 				semaphoreChan <- struct{}{}
 				resp, err := c.GetResult(ctx, url)
-				resultsChan <- &result{
+				resultsChan <- result{
 					Status: resp,
 					Err:    err,
 				}
