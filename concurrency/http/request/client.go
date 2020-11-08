@@ -37,7 +37,7 @@ func (c *client) GetResult(
 	ctx context.Context,
 	url string,
 ) (*status, error) {
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)	// 1
 	if err != nil {
 		return nil, err
 	}
@@ -56,31 +56,31 @@ func (c *client) GetResultChannel(
 	ctx context.Context,
 	urls []string,
 ) <-chan result {
-	semaphoreChan := make(chan struct{}, c.concurrencyLimit)
-	resultsChan := make(chan result)
+	semaphoreChan := make(chan struct{}, c.concurrencyLimit)	// 1
+	resultsChan := make(chan result)							// 2
 
-	var wg sync.WaitGroup
-	wg.Add(len(urls))
+	var wg sync.WaitGroup										// 3
+	wg.Add(len(urls))											// 4
 
 	for _, url := range urls {
-		go func(url string) {
+		go func(url string) {									// 5
 			select {
-			case <-ctx.Done():
+			case <-ctx.Done():									// 6
 				wg.Done()
 			default:
-				semaphoreChan <- struct{}{}
-				resp, err := c.GetResult(ctx, url)
+				semaphoreChan <- struct{}{}						// 7
+				resp, err := c.GetResult(ctx, url)				// 8
 				resultsChan <- result{
 					Status: resp,
 					Err:    err,
 				}
-				<-semaphoreChan
-				wg.Done()
+				<-semaphoreChan									// 9
+				wg.Done()										// 10
 			}
 		}(url)
 	}
 
-	go func() {
+	go func() {													// 11
 		wg.Wait()
 		close(resultsChan)
 		close(semaphoreChan)
