@@ -84,7 +84,8 @@ func TestClient_GetResultChannel(t *testing.T) {
 				urls = append(urls, fmt.Sprintf("%s%s", testServer.URL, path))
 			}
 
-			ctx, _ := context.WithTimeout(context.Background(), tc.contextTimeout)
+			ctx, cancel := context.WithTimeout(context.Background(), tc.contextTimeout)
+			defer cancel()
 			results := client.GetResultChannel(ctx, urls)
 
 			var resultsCounter int
