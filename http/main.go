@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/bendbennett/go-bits/concurrency/http/request"
+	"github.com/bendbennett/go-bits/http/request"
 	"net/http"
 	"runtime"
 	"time"
