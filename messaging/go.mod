@@ -1,4 +1,4 @@
-module github.com/bendbennett/go-bits/concurrency/rabbit
+module github.com/bendbennett/go-bits/messaging
 
 go 1.14
 

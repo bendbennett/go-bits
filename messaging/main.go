@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/bendbennett/go-bits/concurrency/rabbit/config"
-	"github.com/bendbennett/go-bits/concurrency/rabbit/message"
+	"github.com/bendbennett/go-bits/messaging/config"
+	"github.com/bendbennett/go-bits/messaging/message"
 	"log"
 	"strconv"
 	"time"

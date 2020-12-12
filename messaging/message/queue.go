@@ -1,7 +1,7 @@
 package message
 
 import (
-	"github.com/bendbennett/go-bits/concurrency/rabbit/config"
+	"github.com/bendbennett/go-bits/messaging/config"
 	"github.com/streadway/amqp"
 )
 
