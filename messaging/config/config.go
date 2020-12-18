@@ -79,7 +79,7 @@ func New() Config {
 			Exchange: Exchange{
 				Name:       "my_exchange",
 				Kind:       "direct",
-				Durable:    false,
+				Durable:    true,
 				AutoDelete: false,
 				Internal:   false,
 				NoWait:     false,
@@ -87,7 +87,7 @@ func New() Config {
 			},
 			Queue: Queue{
 				Name:       "my_queue",
-				Durable:    false,
+				Durable:    true,
 				AutoDelete: false,
 				Exclusive:  false,
 				NoWait:     false,
